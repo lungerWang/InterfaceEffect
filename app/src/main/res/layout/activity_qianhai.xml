@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_qianhai"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.babykingdom.interfaceeffect.QianhaiActivity">
+
+    <LinearLayout
+        android:padding="10dp"
+        android:orientation="horizontal"
+        android:layout_centerInParent="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <com.babykingdom.interfaceeffect.widget.BoundImageView
+            android:id="@+id/iv1"
+            android:visibility="invisible"
+            android:scaleType="fitCenter"
+            android:background="@mipmap/icon_moblephoen"
+            android:layout_width="160dp"
+            android:layout_height="245dp" />
+        <com.babykingdom.interfaceeffect.widget.BoundImageView
+            android:id="@+id/iv2"
+            android:visibility="invisible"
+            android:scaleType="fitCenter"
+            android:layout_marginLeft="10dp"
+            android:background="@mipmap/icon_telephone"
+            android:layout_width="160dp"
+            android:layout_height="245dp" />
+        <com.babykingdom.interfaceeffect.widget.BoundImageView
+            android:id="@+id/iv3"
+            android:visibility="invisible"
+            android:layout_marginLeft="10dp"
+            android:scaleType="fitCenter"
+            android:background="@mipmap/icon_traffic"
+            android:layout_width="160dp"
+            android:layout_height="245dp" />
+    </LinearLayout>
+
+
+
+</RelativeLayout>

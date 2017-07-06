@@ -32,6 +32,12 @@
                 android:gravity="center"
                 android:onClick="animationEffect"
                 android:text="动画"/>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:onClick="qianhaiClick"
+                android:text="前海项目"/>
         </LinearLayout>
     </ScrollView>
 </RelativeLayout>
