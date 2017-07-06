@@ -17,11 +17,11 @@ public class PlayVideoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play_video);
-        videoView = (FullScreenVideoView) findViewById(R.id.videoView);
-        MediaController mediaController = new MediaController(this);
-        videoView.setMediaController(mediaController);
-
-        videoView.setVideoURI(Uri.parse("android.resource://com.babykingdom.interfaceeffect/" + R.raw.firework));
-        videoView.start();
+//        videoView = (FullScreenVideoView) findViewById(R.id.videoView);
+//        MediaController mediaController = new MediaController(this);
+//        videoView.setMediaController(mediaController);
+//
+//        videoView.setVideoURI(Uri.parse("android.resource://com.babykingdom.interfaceeffect/" + R.raw.firework));
+//        videoView.start();
     }
 }
