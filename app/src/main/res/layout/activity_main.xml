@@ -11,8 +11,27 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.babykingdom.interfaceeffect.MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"/>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:onClick="buttonEffect"
+                android:text="按钮"/>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:onClick="animationEffect"
+                android:text="动画"/>
+        </LinearLayout>
+    </ScrollView>
 </RelativeLayout>

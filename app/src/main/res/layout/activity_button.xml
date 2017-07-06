@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_button"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.babykingdom.interfaceeffect.ButtonActivity">
+
+
+    <!--此效果低版本不能用 API21以上-->
+    <!--  //圆形波纹
+    android:background="?android:attr/selectableItemBackgroundBorderless"
+    //有边界波纹
+    android:background="?android:attr/selectableItemBackground"-->
+    <ImageButton
+        android:layout_centerInParent="true"
+        android:background="?android:attr/selectableItemBackgroundBorderless"
+        android:src="@mipmap/ic_launcher"
+        android:scaleType="fitXY"
+        android:layout_width="100dp"
+        android:layout_height="100dp"/>
+</RelativeLayout>
