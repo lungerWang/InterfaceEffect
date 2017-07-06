@@ -20,4 +20,8 @@ public class MainActivity extends AppCompatActivity {
     public void animationEffect(View view) {
         startActivity(new Intent(this, AnimationActivity.class));
     }
+
+    public void qianhaiClick(View view) {
+        startActivity(new Intent(this, QianhaiActivity.class));
+    }
 }
