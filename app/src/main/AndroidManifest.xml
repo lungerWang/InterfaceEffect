@@ -20,8 +20,10 @@
         <activity
             android:name=".QianhaiActivity"
             android:screenOrientation="landscape" />
-        <activity android:name=".PlayVideoActivity"
-            android:screenOrientation="landscape"></activity>
+        <activity
+            android:name=".PlayVideoActivity"
+            android:screenOrientation="landscape"
+            android:theme="@style/AppTheme2" />
     </application>
 
 </manifest>
