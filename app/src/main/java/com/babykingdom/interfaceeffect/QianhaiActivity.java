@@ -7,15 +7,16 @@ import android.os.Bundle;
 
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.babykingdom.interfaceeffect.widget.BoundImageView;
 import com.github.florent37.viewanimator.ViewAnimator;
 
 public class QianhaiActivity extends AppCompatActivity {
 
-    private BoundImageView iv1;
-    private View iv2;
-    private View iv3;
+    private ImageView iv1;
+    private ImageView iv2;
+    private ImageView iv3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,15 +63,29 @@ public class QianhaiActivity extends AppCompatActivity {
     }
 
     private void findViews() {
-        iv1 = (BoundImageView) findViewById(R.id.iv1);
-        iv2 = findViewById(R.id.iv2);
-        iv3 = findViewById(R.id.iv3);
-        iv1.setOnClickListener(new BoundImageView.OnClickListener(){
-
+        iv1 = (ImageView) findViewById(R.id.iv1);
+        iv2 = (ImageView)findViewById(R.id.iv2);
+        iv3 = (ImageView)findViewById(R.id.iv3);
+        iv1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("wbl", "被点击了");
                 startActivity(new Intent(QianhaiActivity.this, PlayVideoActivity.class));
+            }
+        });
+
+        iv2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("wbl", "2点击");
+                startActivity(new Intent(QianhaiActivity.this, PlayVideoActivityMy.class));
+            }
+        });
+
+        iv3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("wbl", "3点击");
+                startActivity(new Intent(QianhaiActivity.this, PlayVideoActivity3.class));
             }
         });
 

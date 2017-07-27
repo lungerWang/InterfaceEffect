@@ -64,6 +64,7 @@
             android:textStyle="bold" />
 
         <SeekBar
+            android:thumb="@mipmap/player_settings_bright_thumb"
             android:id="@+id/seek_bar_progress"
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="match_parent"
