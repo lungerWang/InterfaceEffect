@@ -16,7 +16,6 @@ import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
-import com.babykingdom.interfaceeffect.R;
 import com.babykingdom.interfaceeffect.widget.FullScreenVideoView;
 
 import java.util.Formatter;
@@ -24,18 +23,18 @@ import java.util.Locale;
 
 public class PlayVideoActivityMy extends AppCompatActivity {
 
-
     private FullScreenVideoView videoView;
     private ImageView iv_center;
     private RelativeLayout rl_transparent;
     private RelativeLayout rl_controller;
     private TextView time_current;
     private TextView time_total;
-    private SeekBar seek_bar_progress;
+    private SeekBar seek_bar_progress_show;
     private SeekBar bar_volume;
     Formatter mFormatter;
     StringBuilder mFormatBuilder;
-    private boolean isDestroy = false;
+    private boolean shouldStop = false;
+    private boolean isProgressByHand = false;
 
     private AudioManager audioManager;
     private int streamMaxVolume;
@@ -106,6 +105,33 @@ public class PlayVideoActivityMy extends AppCompatActivity {
 
             }
         });
+
+        seek_bar_progress_show.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                if(isProgressByHand){
+                    Log.d("wbl", "进度：" + progress);
+                    long duration = videoView.getDuration();
+                    long newposition = (duration * progress) / 1000L;
+                    videoView.seekTo((int) newposition);
+                    if (time_current != null)
+                        time_current.setText(stringForTime( (int) newposition));
+                }
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+                shouldStop = true;
+                isProgressByHand = true;
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                shouldStop = false;
+                isProgressByHand = false;
+                handler.sendEmptyMessage(0);
+            }
+        });
     }
 
     private void initStartEndTime() {
@@ -126,8 +152,8 @@ public class PlayVideoActivityMy extends AppCompatActivity {
         rl_controller = (RelativeLayout) findViewById(R.id.rl_controller);
         time_current = (TextView) findViewById(R.id.time_current);
         time_total = (TextView) findViewById(R.id.time_total);
-        seek_bar_progress = (SeekBar) findViewById(R.id.seek_bar_progress);
-        seek_bar_progress.setMax(1000);
+        seek_bar_progress_show = (SeekBar) findViewById(R.id.seek_bar_progress_show);
+        seek_bar_progress_show.setMax(1000);
         bar_volume = (SeekBar) findViewById(R.id.bar_volume);
         bar_volume.setMax(streamMaxVolume);
         bar_volume.setProgress(streamVolume);
@@ -156,7 +182,7 @@ public class PlayVideoActivityMy extends AppCompatActivity {
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             Log.d("wbl", "数秒");
-            if (!isDestroy) {
+            if (!shouldStop) {
                 refreshProgress();
                 this.sendEmptyMessageDelayed(0, 1000);
             }
@@ -166,14 +192,14 @@ public class PlayVideoActivityMy extends AppCompatActivity {
     private void refreshProgress() {
         int position = videoView.getCurrentPosition();
         int duration = videoView.getDuration();
-        if (seek_bar_progress != null) {
+        if (seek_bar_progress_show != null) {
             if (duration > 0) {
                 // use long to avoid overflow
                 long pos = 1000L * position / duration;
-                seek_bar_progress.setProgress((int) pos);
+                seek_bar_progress_show.setProgress((int) pos);
             }
             int percent = videoView.getBufferPercentage();
-            seek_bar_progress.setSecondaryProgress(percent * 10);
+            seek_bar_progress_show.setSecondaryProgress(percent * 10);
         }
 
         if (time_total != null)
@@ -185,6 +211,6 @@ public class PlayVideoActivityMy extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        isDestroy = true;
+        shouldStop = true;
     }
 }
