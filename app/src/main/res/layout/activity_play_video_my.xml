@@ -64,7 +64,7 @@
             android:textStyle="bold" />
 
         <SeekBar
-            android:thumb="@mipmap/player_settings_bright_thumb"
+            android:thumb="@mipmap/player_settings_bright_thumb2"
             android:id="@+id/seek_bar_progress"
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="match_parent"
@@ -74,6 +74,13 @@
             android:layout_toRightOf="@id/time_current" />
 
     </RelativeLayout>
-
+    <com.babykingdom.interfaceeffect.widget.VerticalSeekBar
+        android:id="@+id/bar_volume"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_marginLeft="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="150dp"
+        android:thumb="@mipmap/player_settings_bright_thumb2"
+        android:layout_centerVertical="true"/>
 
 </RelativeLayout>

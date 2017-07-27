@@ -1,5 +1,7 @@
 package com.babykingdom.interfaceeffect;
 
+import android.content.Context;
+import android.media.AudioManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -26,12 +28,18 @@ public class PlayVideoActivityMy extends AppCompatActivity {
     private FullScreenVideoView videoView;
     private ImageView iv_center;
     private RelativeLayout rl_transparent;
+    private RelativeLayout rl_controller;
     private TextView time_current;
     private TextView time_total;
     private SeekBar seek_bar_progress;
+    private SeekBar bar_volume;
     Formatter mFormatter;
     StringBuilder mFormatBuilder;
     private boolean isDestroy = false;
+
+    private AudioManager audioManager;
+    private int streamMaxVolume;
+    private int streamVolume;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +50,11 @@ public class PlayVideoActivityMy extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_play_video_my);
+
+        //音量相关
+        audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+        streamMaxVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
+        streamVolume = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
 
         initView();
         initData();
@@ -57,6 +70,8 @@ public class PlayVideoActivityMy extends AppCompatActivity {
             public void onClick(View v) {
                 int visibility = iv_center.getVisibility();
                 iv_center.setVisibility(visibility == View.VISIBLE ? View.GONE : View.VISIBLE);
+                bar_volume.setVisibility(visibility == View.VISIBLE ? View.GONE : View.VISIBLE);
+                rl_controller.setVisibility(visibility == View.VISIBLE ? View.GONE : View.VISIBLE);
             }
         });
 
@@ -75,7 +90,22 @@ public class PlayVideoActivityMy extends AppCompatActivity {
     }
 
     private void initListener() {
+        bar_volume.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, progress, 0);
+            }
 
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
     }
 
     private void initStartEndTime() {
@@ -93,11 +123,15 @@ public class PlayVideoActivityMy extends AppCompatActivity {
         videoView = (FullScreenVideoView) findViewById(R.id.videoView);
         iv_center = (ImageView) findViewById(R.id.iv_center);
         rl_transparent = (RelativeLayout) findViewById(R.id.rl_transparent);
+        rl_controller = (RelativeLayout) findViewById(R.id.rl_controller);
         time_current = (TextView) findViewById(R.id.time_current);
         time_total = (TextView) findViewById(R.id.time_total);
         seek_bar_progress = (SeekBar) findViewById(R.id.seek_bar_progress);
-
         seek_bar_progress.setMax(1000);
+        bar_volume = (SeekBar) findViewById(R.id.bar_volume);
+        bar_volume.setMax(streamMaxVolume);
+        bar_volume.setProgress(streamVolume);
+
     }
 
 
@@ -116,32 +150,6 @@ public class PlayVideoActivityMy extends AppCompatActivity {
         }
     }
 
-    /**
-     * ViewPager auto scroll task
-     */
-    private class SwitchTask extends Handler implements Runnable {
-
-        @Override
-        public void run() {
-            this.sendEmptyMessage(0);
-            this.postDelayed(this, 2500);
-        }
-
-        public void start() {
-            this.removeCallbacks(this);
-            this.postDelayed(this, 2500);
-        }
-
-        public void stop() {
-            this.removeCallbacks(this);
-        }
-
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-
-        }
-    }
 
     private Handler handler = new Handler() {
         @Override
