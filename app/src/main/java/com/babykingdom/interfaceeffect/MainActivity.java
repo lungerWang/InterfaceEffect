@@ -24,4 +24,8 @@ public class MainActivity extends AppCompatActivity {
     public void qianhaiClick(View view) {
         startActivity(new Intent(this, QianhaiActivity.class));
     }
+
+    public void integration(View view) {
+        startActivity(new Intent(this, IntegrationActivity.class));
+    }
 }
